@@ -60,3 +60,35 @@ export const logout = (): void => {
     window.location.href = '/login';
   }
 };
+
+export const deleteAccount = async (): Promise<boolean> => {
+  const token = getToken();
+  
+  if (!token) {
+    return false;
+  }
+  
+  try {
+    const response = await fetch('http://localhost:8000/auth/users/me', {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to delete account');
+    }
+    
+    // Clear local auth data and redirect to login
+    removeToken();
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Error deleting account:', error);
+    return false;
+  }
+};

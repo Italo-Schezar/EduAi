@@ -84,3 +84,41 @@ async def get_current_user(current_user: User = Depends(get_current_active_user)
     This endpoint returns the current authenticated user's information.
     """
     return current_user
+
+@router.delete("/users/me", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_user(
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Delete the currently authenticated user.
+    
+    This endpoint permanently deletes the user's account and all associated data.
+    """
+    # Delete the user from database
+    db.delete(current_user)
+    db.commit()
+    return None
+
+@router.delete("/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_user_by_id(
+    user_id: str,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Delete a user by ID (admin only).
+    
+    This endpoint allows administrators to delete any user account.
+    """
+    # TODO: Add admin check here once roles are implemented
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    db.delete(user)
+    db.commit()
+    return None
