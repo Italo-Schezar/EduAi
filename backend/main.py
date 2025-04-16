@@ -8,7 +8,14 @@ import os
 load_dotenv()
 
 # Import API routes
-from src.api.routes import chat
+from src.api.routes import chat, auth
+
+# Import database
+from src.database import engine
+from src.models import user
+
+# Create database tables
+user.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="EduAI API",
@@ -27,6 +34,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(chat.router)
+app.include_router(auth.router)
 
 @app.get("/")
 async def root():

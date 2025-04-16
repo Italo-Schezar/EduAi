@@ -1,6 +1,7 @@
 import AppNavbar from "@/components/AppNavbar";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function AppLayout({
   children,
@@ -8,17 +9,19 @@ export default function AppLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <AppNavbar />
-      <Sidebar />
-      <div className="p-4 md:ml-64 mt-16">
-        <div className="p-4">
-          {children}
+    <ProtectedRoute>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <AppNavbar />
+        <Sidebar />
+        <div className="p-4 md:ml-64 mt-16">
+          <div className="p-4">
+            {children}
+          </div>
+        </div>
+        <div className="md:ml-64">
+          <Footer />
         </div>
       </div>
-      <div className="md:ml-64">
-        <Footer />
-      </div>
-    </div>
+    </ProtectedRoute>
   );
 }

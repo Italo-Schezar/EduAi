@@ -2,8 +2,8 @@ from fastapi import Depends
 import os
 from functools import lru_cache
 
-from services.ai.llm_client import LLMClient
-from services.ai.chat_service import ChatService
+from src.services.ai.llm_client import LLMClient
+from src.services.ai.chat_service import ChatService
 
 @lru_cache()
 def get_settings():

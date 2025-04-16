@@ -1,17 +1,52 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { logout } from '@/utils/auth';
+import { toast } from 'react-hot-toast';
 
 export default function AppNavbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [userName, setUserName] = useState('Usuário');
+  const [userEmail, setUserEmail] = useState('usuario@exemplo.com');
+
+  useEffect(() => {
+    // Fetch user data when component mounts
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const response = await fetch('http://localhost:8000/auth/me', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          setUserName(userData.name);
+          setUserEmail(userData.email);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    toast.success('Logout realizado com sucesso!');
+  };
 
   return (
     <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 fixed top-0 left-0 right-0 z-50">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center">
-          <button 
+          <button
             type="button"
             className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 mr-2"
             aria-controls="sidebar"
@@ -23,22 +58,22 @@ export default function AppNavbar() {
             </svg>
           </button>
           <Link href="/app" className="flex items-center space-x-3">
-            <Image 
-              src="/eduai-logo.svg" 
-              alt="EduAI Logo" 
-              width={150} 
-              height={45} 
+            <Image
+              src="/eduai-logo.svg"
+              alt="EduAI Logo"
+              width={150}
+              height={45}
               priority
             />
           </Link>
         </div>
-        
+
         <div className="flex items-center">
-          <button 
-            type="button" 
-            className="flex text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" 
-            id="user-menu-button" 
-            aria-expanded={isProfileOpen} 
+          <button
+            type="button"
+            className="flex text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button"
+            aria-expanded={isProfileOpen}
             onClick={() => setIsProfileOpen(!isProfileOpen)}
           >
             <span className="sr-only">Open user menu</span>
@@ -48,15 +83,15 @@ export default function AppNavbar() {
               </svg>
             </div>
           </button>
-          
+
           {/* Dropdown menu */}
-          <div 
-            className={`${isProfileOpen ? 'block' : 'hidden'} absolute top-10 right-4 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`} 
+          <div
+            className={`${isProfileOpen ? 'block' : 'hidden'} absolute top-10 right-4 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
             id="user-dropdown"
           >
             <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">Usuário Demo</span>
-              <span className="block text-sm text-gray-500 truncate dark:text-gray-400">usuario@exemplo.com</span>
+              <span className="block text-sm text-gray-900 dark:text-white">{userName}</span>
+              <span className="block text-sm text-gray-500 truncate dark:text-gray-400">{userEmail}</span>
             </div>
             <ul className="py-2" aria-labelledby="user-menu-button">
               <li>
@@ -70,9 +105,12 @@ export default function AppNavbar() {
                 </Link>
               </li>
               <li>
-                <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
                   Sair
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
