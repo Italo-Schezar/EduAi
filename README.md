@@ -1,47 +1,48 @@
 # EduAI Platform
 
-**Plataforma educacional inteligente com IA + Estatísticas**, voltada para jovens e adultos que buscam aprofundamento científico.  
-Este projeto usa **Next.js (frontend)** e **FastAPI (backend)** para criar uma experiência educacional personalizada, com dashboards, IA mentor e integração com Google Calendar.
+**Intelligent educational platform with AI + Statistics**, designed for young people and adults seeking scientific advancement.
+This project uses **Next.js (frontend)** and **FastAPI (backend)** to create a personalized educational experience, with dashboards, AI mentor, and Google Calendar integration.
 
 ---
 
-## 🧠 Visão do Projeto
+## 🧠 Project Vision
 
-- Aprendizado baseado em estatísticas e desempenho real
-- IA mentor treinada com foco em direcionamento acadêmico e profissional
-- Calendário dinâmico com Google Calendar API
-- Sistema modular: frontend (Next.js + TailwindCSS) e backend (FastAPI + Python)
-- Projeto pensado para escalabilidade e possível campanha no Kickstarter
-
----
-
-## 📦 Tecnologias Utilizadas
-
-- Frontend: Next.js + TypeScript + TailwindCSS
-- Backend: FastAPI + Python
-- Banco de Dados: PostgreSQL + Redis (planejado)
-- IA: Integração via OpenRouter API (Claude, DeepSeek, etc.)
-- Controle de Versão: Git + GitHub
+- Learning based on statistics and real performance
+- AI mentor trained with a focus on academic and professional guidance
+- Dynamic calendar with Google Calendar API
+- Modular system: frontend (Next.js + TailwindCSS) and backend (FastAPI + Python)
+- Project designed for scalability and potential Kickstarter campaign
 
 ---
 
-## 🛠️ Instalação e Uso Local (Linux)
+## 📦 Technologies Used
 
-### Pré-requisitos
+- Frontend: Next.js 14 + TypeScript + TailwindCSS
+- Backend: FastAPI + Python 3.10+
+- Database: SQLite (development), PostgreSQL (planned for production)
+- AI: Integration via OpenRouter API (Claude, DeepSeek, etc.)
+- Authentication: JWT with OAuth2
+- Version Control: Git + GitHub
 
-- Node.js e npm
+---
+
+## 🛠️ Installation and Local Usage (Linux)
+
+### Prerequisites
+
+- Node.js and npm
 - Python 3.10+
-- Git instalado
-- (Opcional) Ambiente virtual Python
+- Git installed
+- (Optional) Python virtual environment
 
-### 1. Clone o projeto
+### 1. Clone the project
 
 ```bash
 git clone https://github.com/Italo-Schezar/eduai-platform.git
 cd eduai-platform
 ```
 
-### 2. Instale o frontend (Next.js)
+### 2. Install the frontend (Next.js)
 
 ```bash
 cd frontend
@@ -49,47 +50,68 @@ npm install
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) no navegador.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 3. Configurar e rodar backend (ainda em construção)
+### 3. Configure and run the backend
 
 ```bash
 cd ../backend
 python -m venv venv
-source venv/bin/activate  # ou venv\Scripts\activate no Windows
-pip install fastapi uvicorn
-uvicorn main:app --reload
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+# Create a .env file based on .env.example and add your OpenRouter API key
+./run.sh  # or: uvicorn main:app --reload
 ```
+
+The API will be available at http://localhost:8000 and the documentation at http://localhost:8000/docs
 
 ---
 
-## 📂 Estrutura Atual do Projeto
+## 📂 Current Project Structure
 
 ```
 eduai-platform/
-├── frontend/      # Aplicação Next.js (interface)
-├── backend/       # Estrutura inicial para FastAPI
-├── docs/          # Arquitetura, metas e anotações
-└── architecture.md
+├── frontend/                # Next.js application (interface)
+│   ├── app/                # Routes and pages
+│   │   ├── (app)/         # Authenticated area
+│   │   └── (public)/      # Public pages (landing page)
+│   ├── components/        # Reusable components
+│   └── public/            # Static files
+│
+├── backend/               # FastAPI API
+│   ├── src/               # Source code
+│   │   ├── api/           # Routes and endpoints
+│   │   ├── auth/          # Authentication and security
+│   │   ├── models/        # Database models
+│   │   ├── schemas/       # Pydantic schemas
+│   │   └── services/      # Services and business logic
+│   └── venv/              # Python virtual environment
+│
+└── docs/                  # Documentation
+    └── architecture.md    # System architecture
 ```
 
 ---
 
-## 🤝 Colaboração
+## 🤝 Collaboration
 
-Este projeto está em fase inicial de desenvolvimento colaborativo.  
-Caso queira contribuir com código, ideias ou testes, sinta-se à vontade para fazer um fork ou mandar issues/sugestões.
-
----
-
-## 📅 Status Atual
-
-- [x] Estrutura Git/GitHub configurada
-- [x] Frontend iniciado com Next.js e Tailwind
-- [ ] Backend em estruturação com FastAPI
-- [ ] Integração com IA e Google Calendar pendentes
-- [ ] Deploy e Landing Page futura para Kickstarter
+This project is in the initial phase of collaborative development.
+If you want to contribute with code, ideas, or tests, feel free to fork the repository or submit issues/suggestions.
 
 ---
 
-> Atualizado em 16/04/2025
+## 📅 Current Status
+
+- [x] Git/GitHub structure configured
+- [x] Frontend started with Next.js and Tailwind
+- [x] Public and authenticated routes structure
+- [x] Backend structured with FastAPI
+- [x] OpenRouter API integration implemented
+- [x] JWT authentication system
+- [ ] Dashboard with learning statistics
+- [ ] Google Calendar integration pending
+- [ ] Deploy and Landing Page for Kickstarter
+
+---
+
+> Updated on 04/16/2025

@@ -1,13 +1,15 @@
 # EduAI Backend
 
-This is the backend for the EduAI educational platform, built with FastAPI and Python.
+This is the backend of the EduAI educational platform, built with FastAPI and Python. The backend provides APIs for authentication, AI chat, learning path generation, and performance analysis.
 
-## Features
+## Implemented Features
 
-- AI Mentor powered by OpenRouter API
-- Chat completion API
-- Structured response generation
-- Learning path generation
+- Integration with OpenRouter API for access to advanced AI models
+- Chat API for communication with the AI mentor
+- Structured response generation in JSON format
+- Personalized learning path generation
+- JWT authentication system
+- SQLite database for development
 
 ## Getting Started
 
@@ -41,8 +43,14 @@ This is the backend for the EduAI educational platform, built with FastAPI and P
 
 ### Running the Server
 
+You can run the server using the convenience script or directly with uvicorn:
+
 ```bash
-uvicorn main:app --reload
+# Using the convenience script
+./run.sh
+
+# Or directly with uvicorn
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The API will be available at http://localhost:8000.
@@ -53,9 +61,14 @@ API documentation is available at:
 
 ## API Endpoints
 
+### Authentication
+
+- `POST /auth/register`: Register a new user
+- `POST /auth/login`: Authenticate user and obtain JWT token
+
 ### Chat
 
-- `POST /chat/completion`: Generate a chat completion response
+- `POST /chat/completion`: Generate AI chat response
 
 ## Environment Variables
 
@@ -65,3 +78,40 @@ API documentation is available at:
 - `HOST`: Server host (default: 0.0.0.0)
 - `DEBUG`: Debug mode (default: True)
 - `FRONTEND_URL`: Frontend URL for CORS (default: http://localhost:3000)
+- `DATABASE_URL`: Database connection URL (default: sqlite:///./eduai.db)
+- `SECRET_KEY`: Secret key for JWT token generation
+- `ALGORITHM`: Algorithm for JWT signature (default: HS256)
+- `ACCESS_TOKEN_EXPIRE_MINUTES`: Token expiration time in minutes (default: 30)
+
+## Project Structure
+
+```
+backend/
+├── src/               # Source code
+│   ├── api/           # Routes and endpoints
+│   │   ├── routes/     # Route definitions
+│   │   └── dependencies/ # Dependencies for injection
+│   ├── auth/          # Authentication and security
+│   ├── models/        # Database models
+│   ├── schemas/       # Pydantic schemas
+│   └── services/      # Services and business logic
+│       ├── ai/          # AI services
+│       └── analytics/   # Analytics services
+├── main.py           # Application entry point
+├── requirements.txt   # Project dependencies
+├── .env.example       # Example environment variables
+└── run.sh             # Script to run the server
+```
+
+## Current Status
+
+- [x] Basic API structure
+- [x] OpenRouter API integration
+- [x] JWT authentication system
+- [x] Chat endpoint
+- [ ] Complete AI mentor service
+- [ ] Performance analysis service
+- [ ] Google Calendar integration
+- [ ] Migration to PostgreSQL
+
+> Updated on 04/16/2025
