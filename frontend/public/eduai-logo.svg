@@ -1,0 +1,11 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M40 10C23.4315 10 10 23.4315 10 40C10 56.5685 23.4315 70 40 70C56.5685 70 70 56.5685 70 40C70 23.4315 56.5685 10 40 10Z" fill="#4F46E5" transform="scale(0.6) translate(10, 0)"/>
+  <path d="M40 15C26.1929 15 15 26.1929 15 40C15 53.8071 26.1929 65 40 65C53.8071 65 65 53.8071 65 40C65 26.1929 53.8071 15 40 15Z" fill="#818CF8" transform="scale(0.6) translate(10, 0)"/>
+  <path d="M40 25C31.7157 25 25 31.7157 25 40C25 48.2843 31.7157 55 40 55C48.2843 55 55 48.2843 55 40C55 31.7157 48.2843 25 40 25Z" fill="#C7D2FE" transform="scale(0.6) translate(10, 0)"/>
+  <path d="M38 32L42 36M42 36L38 40M42 36H30" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="scale(0.6) translate(10, 0)"/>
+  <path d="M42 44L38 48M38 48L42 52M38 48H50" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="scale(0.6) translate(10, 0)"/>
+  
+  <!-- Text -->
+  <text x="60" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="#4F46E5">EduAI</text>
+  <text x="60" y="50" font-family="Arial, sans-serif" font-size="12" fill="#6B7280">Aprendizado Inteligente</text>
+</svg>
